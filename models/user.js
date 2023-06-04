@@ -16,10 +16,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isAdmin: Boolean,
     date: {type: Date, default: Date.now}
 });
 userSchema.methods.generateJWT = function() {
-    return jwt.sign({_id: this._id,name: this.name},process.env.SECRET_KEY_JWT)
+    return jwt.sign({
+        _id: this._id,
+        name: this.name,
+        isAdmin: this.isAdmin
+        }
+        ,process.env.SECRET_KEY_JWT
+    )
 }
 const User = mongoose.model('user',userSchema);
 export default User;

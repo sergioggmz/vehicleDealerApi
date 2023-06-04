@@ -39,12 +39,19 @@ router.post('/',[
         name: req.body.name,
         isCustomer: false,
         email: req.body.email,
-        password: hashPassword
+        password: hashPassword,
+        isAdmin: req.body.isAdmin
     })
 
     await user.save();
     const jwtToken = user.generateJWT();
-    res.status(201).header('Authorization',jwtToken).send({_id:user._id,name: user.name, email:user.email});
+    res.status(201)
+        .header('Authorization',jwtToken)
+        .send({
+            _id:user._id,
+            name: user.name,
+            email:user.email
+        });
 });
 
 router.put('/:id',[
