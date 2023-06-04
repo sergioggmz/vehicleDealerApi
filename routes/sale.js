@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import Sale from '../models/sale.js';
 import Car from '../models/car.js';
 import User from '../models/user.js';
+import auth from "../middlewares/auth.js";
 
 const router = express.Router();
 router.get('/', async (req,res) => {
@@ -18,7 +19,7 @@ router.get('/:id', async (req,res) => {
     res.status(200).send(sale);
 });
 
-router.post('/', async (req,res) => {
+router.post('/',auth, async (req,res) => {
     const user = await User.findById(req.body.user);
     const car = await Car.findById(req.body.car);
     if(!user) {

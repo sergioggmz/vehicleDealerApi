@@ -20,6 +20,6 @@ app.use('/api/auth',auth);
 
 app.listen(port, () => console.log(`listen on port ${port}`))
 
-mongoose.connect('mongodb://127.0.0.1/carsdb')
+mongoose.connect(`${process.env.DATABASE_URI}/${process.env.DATABASE_NAME}`)
         .then(() => console.log('connected to mongoDB'))
         .catch(() => console.log('Error connecting to mongoDB'))
