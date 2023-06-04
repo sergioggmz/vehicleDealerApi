@@ -53,11 +53,11 @@ router.post('/',auth, async (req,res) => {
         car.sold = true;
         car.save();
         await session.commitTransaction();
-        session.endSession();
+        await session.endSession();
         res.status(201).send(result);
     }catch (e) {
         await session.abortTransaction();
-        session.endSession();
+        await session.endSession();
         res.status(500).send(e.message);
     }
 });

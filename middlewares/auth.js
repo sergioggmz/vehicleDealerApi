@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 function auth(req,res,next) {
-    const jwtToken = req.headers.Authorization;
+    const jwtToken = req.headers['authorization'];
     if(!jwtToken) {
         return res.status(401).send('Forbidden access, we need a valid token.');
     }
