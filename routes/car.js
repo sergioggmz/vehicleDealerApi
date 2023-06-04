@@ -1,12 +1,14 @@
 import express from "express";
-
 import Car from '../models/car.js';
 import {Company} from '../models/company.js';
 import {check,validationResult} from 'express-validator';
+import authorize from "../middlewares/role.js";
+import auth from "../middlewares/auth.js";
+import Role from '../helpers/role.js';
 
 const router = express.Router();
 
-router.get('/', async (req,res) => {
+router.get('/',[auth, authorize([Role.Admin])], async (req,res) => {
     const cars = await Car
         .find()
     res.send(cars);

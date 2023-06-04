@@ -40,7 +40,7 @@ router.post('/',[
         isCustomer: false,
         email: req.body.email,
         password: hashPassword,
-        isAdmin: req.body.isAdmin
+        role: req.body.role
     })
 
     await user.save();
