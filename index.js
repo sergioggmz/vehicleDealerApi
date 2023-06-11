@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import mongooseConnection from "./helpers/mongoose.js";
 import carRoute from './routes/car.js';
 import userRoute from './routes/user.js';
 import companyRoute from './routes/company.js';
@@ -20,6 +20,6 @@ app.use('/api/auth',auth);
 
 app.listen(port, () => console.log(`listen on port ${port}`))
 
-mongoose.connect(`${process.env.DATABASE_URI}/${process.env.DATABASE_NAME}`)
+mongooseConnection()
         .then(() => console.log('connected to mongoDB'))
-        .catch(() => console.log('Error connecting to mongoDB'))
+        .catch(() => console.log('Error connecting to mongoDB'));
